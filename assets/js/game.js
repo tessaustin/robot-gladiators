@@ -3,7 +3,8 @@ var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
 
-console.log(playerName, playerAttack, playerHealth, playerMoney)
+console.log(playerName);
+console.log(playerAttack, playerHealth, playerMoney);
 
 var enemyName = "Roborto";
 var enemyHealth = 50;
@@ -14,11 +15,9 @@ var fight = function() {
     window.alert("Welcome to Robot Gladiators!");
     
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
-    console.log (promptFight);
     
     //If player choses to fight, then fight
     if (promptFight === "fight" || promptFight === "FIGHT") {
-    
     //Remove enemy's health by subtracting the amount set in the playerAttack variable
     enemyHealth = enemyHealth - playerAttack;
     console.log(

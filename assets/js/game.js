@@ -38,10 +38,15 @@ var startGame = function() {
 var endGame = function () {
     window.alert("The game has now ended. Let's see how you did!");
     
-    if (playerInfo.health > 0) {
-    window.alert("Great job, you've survived the game! You now have a score of " + playerInfo.money + '.');
+    var highScore = localStorage.getItem("highscore") || 0;
+
+    if (playerInfo.money > highScore) {
+        localStorage.setItem("highscore", playerInfo.money);
+        localStorage.setItem("name", playerInfo.name);
+
+    alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
     } else {
-        window.alert("You've lost your robot in battle.");
+    alert(playerInfo.name + " did not beat the high score of " + highScore + ". Maybe next time!");
     }
 
     //Ask player if they'd like to play again
@@ -77,7 +82,14 @@ var fight = function(enemy) {
     
     enemy.health = Math.max(0, enemy.health - damage);
     console.log(
-    playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining. "
+    playerInfo.name + 
+    " attacked " + 
+    enemy.name + 
+    ". " + 
+    enemy.name + 
+    " now has " + 
+    enemy.health + 
+    " health remaining. "
     );
         
         //Check enemy's health
@@ -86,11 +98,6 @@ var fight = function(enemy) {
 
         //Award player money for wimming
         playerInfo.money + playerInfo.money + 20;
-
-        var storeConfirm = window.confirm("The fight is over, visit the store before the next round?" );
-        if (storeConfirm) {
-            shop();
-        }
         
         break;
         } else {
@@ -171,40 +178,6 @@ var getPlayerName = function () {
 };
 
 
-
-var shop = function () {
-    //Ask player what they'd like to do
-    var shopOptionPrompt = window.prompt( 
-        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
-    );
-
-    //Use switch to carry out action
-    switch (shopOptionPrompt) {
-        case "refill":
-        case "REFILL":
-            playerInfo.refillHealth();
-            break;
-
-        case "upgrade":
-        case "UPGRADE":
-            playerInfo.upgradeAttack();
-            break;
-
-        case "leave":
-        case "LEAVE":
-            window.alert("Leaving the store.");
-
-            //Do nothing, so function will end
-            break;
-            default:
-                window.alert("You did not pick a valid option. Try again.");
-
-            //Call shop() again to force player to pick a valid option
-            shop();
-            break;
-    }
-};
-
 //Random numeric value
 var randomNumber = function(min, max) {
     var value = Math.floor(Math.random() * (max - min + 1) + min);
@@ -216,7 +189,7 @@ var fightOrSkip = function() {
     // ask player if they'd like to fight or skip using fightOrSkip function
     var promptFight = window.prompt('Would you like FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
   
-    if (promptFight === "" || promptFight === null) {
+    if (promptFight === "" || promptFight === null || !isNaN(promptFight)) {
         window.alert("You need to provide a valid answer! Please try again.");
         return fightOrSkip();
     }

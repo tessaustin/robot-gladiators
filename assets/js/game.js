@@ -13,11 +13,7 @@ var startGame = function() {
             var pickedEnemyObj = enemyInfo[i];
             pickedEnemyObj.health = randomNumber(40, 60);
             
-<<<<<<< HEAD
-            console.log (pickedEnemyObj);
-=======
             console.log(pickedEnemyObj);
->>>>>>> develop
 
             fight(pickedEnemyObj);
 
@@ -41,25 +37,11 @@ var startGame = function() {
 //Function to end the entire game
 var endGame = function () {
     window.alert("The game has now ended. Let's see how you did!");
-<<<<<<< HEAD
     
     if (playerInfo.health > 0) {
     window.alert("Great job, you've survived the game! You now have a score of " + playerInfo.money + '.');
     } else {
         window.alert("You've lost your robot in battle.");
-=======
-
-    //LocalStorage
-    var highScore = localStorage.getItem("highscore") || 0;
-
-    if (playerInfo.money > highScore) {
-        localStorage.setItem("highscore", playerInfo.money);
-        localStorage.setItem("name", playerInfo.name);
-
-        alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
-    } else {
-        alert(playerInfo.name + " did not beat the high score of " + highScore + ". Maybe next time!");
->>>>>>> develop
     }
 
     //Ask player if they'd like to play again
@@ -89,7 +71,6 @@ var fight = function(enemy) {
         
         var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack)
 
-<<<<<<< HEAD
     //Remove enemy's health by subtracting the amount set in the playerInfo.attack variable
     //Random damage value based on player's attack power
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
@@ -98,21 +79,6 @@ var fight = function(enemy) {
     console.log(
     playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining. "
     );
-=======
-        //Remove enemy's health by subtracting the amount set in the playerInfo.attack variable
-        enemy.health = Math.max(0, enemy.health - damage);
-    
-        console.log(
-        playerInfo.name + 
-        " attacked " + 
-        enemy.name + 
-        ". " + 
-        enemy.name + 
-        " now has " + 
-        enemy.health + 
-        " health remaining. "
-        );
->>>>>>> develop
         
         //Check enemy's health
         if (enemy.health <= 0) {
@@ -120,15 +86,12 @@ var fight = function(enemy) {
 
         //Award player money for wimming
         playerInfo.money + playerInfo.money + 20;
-<<<<<<< HEAD
 
         var storeConfirm = window.confirm("The fight is over, visit the store before the next round?" );
         if (storeConfirm) {
             shop();
         }
         
-=======
->>>>>>> develop
         break;
         } else {
             window.alert(enemy.name + " still has " + enemy.health + " health left.");
@@ -322,13 +285,9 @@ var enemyInfo = [
     }
 ];
 
-<<<<<<< HEAD
 console.log(enemyInfo);
 console.log(enemyInfo[0]);
 console.log(enemyInfo[0].name);
 console.log(enemyInfo[0]['attack']);
-
-=======
->>>>>>> develop
 
 startGame();
